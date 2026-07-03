@@ -194,7 +194,7 @@ export function Characters() {
               
               {/* Web novel style typography for name */}
               <div className="absolute bottom-4 left-6 pr-6">
-                <h2 className="text-4xl sm:text-5xl font-black italic text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-400 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] tracking-tighter" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}>
+                <h2 className="text-4xl sm:text-5xl font-black italic text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-400 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] tracking-tighter pr-2" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}>
                   {char.name}
                 </h2>
                 <p className="text-fluffies font-bold tracking-widest text-sm uppercase mt-1 drop-shadow-md">

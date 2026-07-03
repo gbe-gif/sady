@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import streetImg from "../assets/images/sandy_cove_street_1783070673476.jpg";
 import spotsImg from "../assets/images/sandy_spots_1783070695697.jpg";
 import { MapPin, Sun, ShieldCheck, ShoppingBag, Building2, Trees, Store, Trash2, Map } from "lucide-react";
+import { PersonaGenerator } from "./PersonaGenerator";
 
 export function Home() {
   return (
@@ -33,6 +34,8 @@ export function Home() {
       </div>
 
       <div className="px-6 space-y-6">
+        <PersonaGenerator />
+
         <p className="text-lg font-medium text-slate-200 leading-relaxed border-l-4 border-sandy-orange pl-4">
           2026년 미국 캘리포니아주에 위치한 트렌디한 힙스터 상권. 유명 대학가와 인접해 유동 인구가 많으며, 현재 젠트리피케이션이 활발히 진행 중입니다.
         </p>
