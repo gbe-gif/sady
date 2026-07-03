@@ -1,0 +1,6 @@
+{
+  "name": "Sandy Cove St. RP Guide",
+  "description": "A world-building guide for the Sandy Cove Street role-playing setting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
