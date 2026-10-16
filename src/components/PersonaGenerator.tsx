@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Copy, Check, UserSquare2, PawPrint, Cat, X } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const personaDatabase = {
   raccoon: [
@@ -411,15 +412,24 @@ export function PersonaGenerator() {
     }
   };
 
+  const { language } = useLanguage();
+  const titleText = language === 'ja' ? 'ペルソナ ランダム推薦' : language === 'en' ? 'Random Persona Generator' : '페르소나 랜덤 추천';
+  const category1Text = language === 'ja' ? '1. アライグマ (フラッフィーズ)' : language === 'en' ? '1. Raccoon (Fluffies)' : '1. 라쿤';
+  const category2Text = language === 'ja' ? '2. その他動物' : language === 'en' ? '2. Other Animals' : '2. 기타 동물';
+  const category3Text = language === 'ja' ? '3. 人間 (ぶっ飛んだクセ者)' : language === 'en' ? '3. Human (Wild & Quirky)' : '3. 인간 (개쩔거나 이상하거나)';
+  const copyText = copied 
+    ? (language === 'ja' ? 'コピー完了！' : language === 'en' ? 'Copied!' : '복사 완료!')
+    : (language === 'ja' ? '全文コピー' : language === 'en' ? 'Copy All' : '선택(Copy)');
+
   return (
     <>
       <button 
         onClick={() => setIsOpen(true)}
-        className="w-full flex items-center justify-between p-5 bg-sandy-navy rounded-2xl border border-sandy-orange/60 shadow-[0_0_15px_rgba(224,122,95,0.4)] hover:shadow-[0_0_20px_rgba(224,122,95,0.6)] hover:border-sandy-orange transition-all duration-300 group"
+        className="w-full flex items-center justify-between p-5 bg-sandy-navy rounded-2xl border border-sandy-orange/60 shadow-[0_0_15px_rgba(224,122,95,0.4)] hover:shadow-[0_0_20px_rgba(224,122,95,0.6)] hover:border-sandy-orange transition-all duration-300 group cursor-pointer"
       >
         <div className="flex items-center gap-3">
           <Sparkles className="w-5 h-5 text-sandy-orange" />
-          <h2 className="text-lg font-bold text-slate-100 group-hover:text-sandy-orange transition-colors">페르소나 랜덤 추천</h2>
+          <h2 className="text-lg font-bold text-slate-100 group-hover:text-sandy-orange transition-colors">{titleText}</h2>
         </div>
       </button>
 
@@ -442,7 +452,7 @@ export function PersonaGenerator() {
               <div className="flex items-center justify-between p-5 border-b border-white/10 shrink-0">
                 <div className="flex items-center gap-3">
                   <Sparkles className="w-5 h-5 text-sandy-orange" />
-                  <h2 className="text-lg font-bold text-slate-100">페르소나 랜덤 추천</h2>
+                  <h2 className="text-lg font-bold text-slate-100">{titleText}</h2>
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
@@ -456,21 +466,21 @@ export function PersonaGenerator() {
                 <div className="flex flex-col gap-3">
                   <button 
                     onClick={() => generatePersona('raccoon')}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${activeCategory === 'raccoon' ? 'bg-sandy-orange text-sandy-navy-dark' : 'bg-sandy-navy-light text-slate-300 hover:bg-white/10 border border-white/5'}`}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${activeCategory === 'raccoon' ? 'bg-sandy-orange text-sandy-navy-dark' : 'bg-sandy-navy-light text-slate-300 hover:bg-white/10 border border-white/5'}`}
                   >
-                    <PawPrint className="w-5 h-5" /> 1. 라쿤
+                    <PawPrint className="w-5 h-5" /> {category1Text}
                   </button>
                   <button 
                     onClick={() => generatePersona('other')}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${activeCategory === 'other' ? 'bg-sandy-orange text-sandy-navy-dark' : 'bg-sandy-navy-light text-slate-300 hover:bg-white/10 border border-white/5'}`}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${activeCategory === 'other' ? 'bg-sandy-orange text-sandy-navy-dark' : 'bg-sandy-navy-light text-slate-300 hover:bg-white/10 border border-white/5'}`}
                   >
-                    <Cat className="w-5 h-5" /> 2. 기타 동물
+                    <Cat className="w-5 h-5" /> {category2Text}
                   </button>
                   <button 
                     onClick={() => generatePersona('human')}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${activeCategory === 'human' ? 'bg-sandy-orange text-sandy-navy-dark' : 'bg-sandy-navy-light text-slate-300 hover:bg-white/10 border border-white/5'}`}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors cursor-pointer ${activeCategory === 'human' ? 'bg-sandy-orange text-sandy-navy-dark' : 'bg-sandy-navy-light text-slate-300 hover:bg-white/10 border border-white/5'}`}
                   >
-                    <UserSquare2 className="w-5 h-5" /> 3. 인간 (개쩔거나 이상하거나)
+                    <UserSquare2 className="w-5 h-5" /> {category3Text}
                   </button>
                 </div>
 
@@ -489,10 +499,10 @@ export function PersonaGenerator() {
                     <div className="flex justify-end">
                       <button 
                         onClick={copyToClipboard}
-                        className="flex items-center gap-2 px-4 py-2 bg-sandy-navy-light hover:bg-white/10 text-slate-200 rounded-lg text-sm font-medium transition-colors border border-white/5"
+                        className="flex items-center gap-2 px-4 py-2 bg-sandy-navy-light hover:bg-white/10 text-slate-200 rounded-lg text-sm font-medium transition-colors border border-white/5 cursor-pointer"
                       >
                         {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                        {copied ? '복사 완료!' : '선택(Copy)'}
+                        {copyText}
                       </button>
                     </div>
                   </motion.div>
